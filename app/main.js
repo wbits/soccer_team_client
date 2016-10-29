@@ -2,7 +2,7 @@
 
 var React    = require('react'),
     ReactDom = require('react-dom'),
-    Ajax	 = require('./ajax');
+    Ajax     = require('./ajax');
 
 class Player extends React.Component
 {
