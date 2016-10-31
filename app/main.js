@@ -31,25 +31,37 @@ class PlayerList extends React.Component
     }
 
     componentDidMount() {
+        var _this = this;
+
         Ajax.get('http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/showPlayers')
             .then(JSON.parse)
             .then((result) =>
-                this.setState({players: result.players})
+                result.players.map((player) =>
+                   _this.addPlayer(player)
+                );
             )
             .catch((error) => {
                 console.log(error);
             })
         );
-    }  
+    }
+
+    addPlayer(player) {
+        this.state.players.push({
+            firstName: player.first_name,
+            lastName: player.last_name,
+            emailAddress: player.email_address
+        });
+    }
 
     render() {
         return (
             <ul>
                 {this.state.players.map((player) =>
-                    <Player firstName={player.first_name}
-                            lastName={player.last_name}
-                            emailAddress={player.email_address}
-                            key={player.email_address} />
+                    <Player firstName={player.firstName}
+                            lastName={player.lastName}
+                            emailAddress={player.emailAddress}
+                            key={player.emailAddress} />
                 )}
             </ul>
         );
