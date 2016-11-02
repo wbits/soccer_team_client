@@ -1,0 +1,17 @@
+#root {
+    font-family: Helvetica;
+    font-size: 14px;
+}
+
+.playerList {
+    list-style: none;
+}
+
+.playerList li {
+    padding: 8px;
+    margin: 8px;
+    border-style: solid;
+    border-color: #ddd;
+    border-width: 1px;
+    border-radius: 8px;
+}

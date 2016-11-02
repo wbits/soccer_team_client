@@ -1,69 +1,70 @@
-'use strict';
+import React from 'react';
+// import Ajax  from'./../ajax';
+import Player from './player';
 
-var React = require('react'),
-    ajax  = require('./../ajax');
-
-class Player extends React.Component
+export default class PlayerList extends React.Component
 {
     constructor(props) {
         super(props);
-    }
-
-    getFullName() {
-        return this.props.firstName + ' ' + this.props.lastName;
-    }
-
-    render() {
-        return (
-            <li id="{this.props.emailAddress}">{this.getFullName()}</li>;
-        );
-    }
-}
-
-class PlayerList extends React.Component
-{
-    // constructor(teamId, uri = 'http://192.168.99.100:8000') {
-    //     this.players = [];
-    //     this.uri     = uri;
-    //     this.teamId  = teamId;
-    // }
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        this.fetchInitialData();
-    }
-
-    fetchInitialData() {
-        let uri = this.props.uri + '/team/' + this.props.teamId + '/showPlayers';
-
-        ajax.get(uri)
-            .then(JSON.parse)
-            .then((result) => this.load(result['players']))
-            .catch((error) => {
-                console.log(error);
-            }
-        );
-    }
-
-    load(playerData) {
-        for (var i in playerData) {
-            this.props.players.push(new Player(playerData[i]));
+        this.state = {
+            players: []
         }
     }
 
-    render() {
-        return (
-            <h1>Hello</h1>
+    componentDidMount() {
+        const result = {
+            'players': [
+                {'first_name': 'John', 'last_name': 'Doe', 'email_address': 'john@doe.nl'},
+                {'first_name': 'Frank', 'last_name': 'Williams', 'email_address': 'frankwilliams@foo.bar'},
+                {'first_name': 'Jane', 'last_name': 'Doe', 'email_address': 'jane@doe.foo'}
+            ]
+        };
+
+        result.players.map((player) =>
+           this.addPlayer(player)
         );
-        // return (
-        //     <ul className="players">
-        //     for (var i in this.players) {
-        //         this.props.players[i].render()
-        //     }
-        //     </ul>
+
+        // Ajax.get('http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/showPlayers')
+        //     .then(JSON.parse)
+        //     .then((result) =>
+        //         result.players.map((player) =>
+        //            _this.addPlayer(player)
+        //         );
+        //     )
+        //     .catch((error) => {
+        //         console.log(error);
+        //     })
         // );
+    }
+
+    addPlayer(player) {
+        let state = this.state;
+
+        state.players.push({
+            firstName: player.first_name,
+            lastName: player.last_name,
+            emailAddress: player.email_address
+        });
+
+        this.setState(state);
+    }
+
+    render() {
+
+        const renderPlayer = (player) => {
+            return (
+                <li key={player.emailAddress}>
+                    <Player firstName={player.firstName}
+                            lastName={player.lastName}
+                            emailAddress={player.emailAddress} />
+                </li>
+            )
+        };
+
+        return (
+            <ul className="playerList">
+                {this.state.players.map(renderPlayer)}
+            </ul>  
+        );
     }
 }
