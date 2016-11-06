@@ -1,8 +1,3 @@
-import React from 'react';
-import ReactDom from 'react-dom';
-import PlayerList from './players';
+import renderPlayerList from './players'
 
-ReactDom.render(
-    <PlayerList />,
-    document.getElementById('root')
-)
+renderPlayerList();

@@ -5,7 +5,7 @@ module.exports = {
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
-  entry: './app/app.jsx',
+  entry: ['whatwg-fetch', './app/app.jsx'],
   output: {
     path: './dist',
     filename: 'bundle.js'
