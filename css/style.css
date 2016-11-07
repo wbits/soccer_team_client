@@ -3,11 +3,11 @@
     font-size: 14px;
 }
 
-.playerList {
+ul {
     list-style: none;
 }
 
-.playerList li {
+li {
     padding: 8px;
     margin: 8px;
     border-style: solid;

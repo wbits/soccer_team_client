@@ -6,16 +6,12 @@ export const FETCH_PLAYERS   = 'FETCH_PLAYERS';
 export const REQUEST_PLAYERS = 'REQUEST_PLAYERS';
 export const RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
 
-export function addPlayer(player) {
-    return { type: ADD_PLAYER, player }
-}
+export const addPlayer      = (player) => ({ type: ADD_PLAYER, player });
+export const removePlayer   = (player) => ({ type: REMOVE_PLAYER, player });
+export const requestPlayers = () => ({ type: REQUEST_PLAYERS });
 
-export function removePlayer(player) {
-    return { type: REMOVE_PLAYER, player }
-}
-
-export function savePlayer(url, player) {
-    return function(dispatch) {
+export const savePlayer = (url, player) => {
+    return (dispatch) => {
         fetch(url, {
             method: 'POST',
             headers: {
@@ -31,8 +27,25 @@ export function savePlayer(url, player) {
     }
 }
 
-export function fetchPlayers(url) {
-    return function(dispatch) {
+export const deletePlayer = (url, player) => {
+    return (dispatch) => {
+        fetch(url, {    
+           method: 'POST',
+            headers: {
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                first_name: player.first_name,
+                last_name: player.last_name,
+                email: player.email_address
+            }) 
+        })
+        .then(dispatch(removePlayer(player)));
+    }
+}
+
+export const fetchPlayers = (url) => {
+    return (dispatch) => {
         dispatch(requestPlayers());
         return fetch(url)
             .then(response => response.json())
@@ -40,15 +53,10 @@ export function fetchPlayers(url) {
     }
 }
 
-function requestPlayers() {
-  return {
-    type: REQUEST_PLAYERS
-  }
-}
-
-function receivePlayers(json) {
-    return function (dispatch) {
-        json.players.map((player) => {
+export const receivePlayers = (json) => {
+    let playersArray = (typeof json.players === 'object') ? Object.values(json.players) : json.players;
+    return (dispatch) => {
+        playersArray.map((player) => {
             dispatch(addPlayer(player));
         })
     }

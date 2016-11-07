@@ -1,3 +1,3 @@
-import renderPlayerList from './players'
+import { renderPlayerList } from './players';
 
 renderPlayerList();

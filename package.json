@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/wbits/soccer_team_client#readme",
   "devDependencies": {
+    "babel-plugin-add-module-exports": "^0.2.1",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   },

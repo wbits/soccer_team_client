@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux';
-import { FETCH_PLAYERS, ADD_PLAYER, REMOVE_PLAYER } from './actions';
+import { REQUEST_PLAYERS, ADD_PLAYER, REMOVE_PLAYER } from './actions';
+
+const VISIBILITY_FETCHING_PLAYERS    = 'hidden';
+const VISIBILITY_LOADING_SUCCESSFULL = 'visible';
 
 function players(state = [], action) {
     switch(action.type) {
-        case FETCH_PLAYERS:
-            return state;
         case ADD_PLAYER:
             return [
                 ...state,
@@ -19,8 +20,20 @@ function players(state = [], action) {
     }
 }
 
+function visibility(state = VISIBILITY_FETCHING_PLAYERS, action) {
+    switch(action.type) {
+        case REQUEST_PLAYERS:
+            return VISIBILITY_FETCHING_PLAYERS;
+        case ADD_PLAYER:
+            return VISIBILITY_LOADING_SUCCESSFULL;
+        default:
+            return state;
+    }
+}
+
 const reducer = combineReducers({
-  players
+    players,
+    visibility
 })
 
 export default reducer;
