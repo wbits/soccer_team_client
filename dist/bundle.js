@@ -499,11 +499,11 @@
 
 	var _reactDom = __webpack_require__(75);
 
-	var _root = __webpack_require__(36);
+	var _root = __webpack_require__(270);
 
 	var _root2 = _interopRequireDefault(_root);
 
-	var _store = __webpack_require__(72);
+	var _store = __webpack_require__(276);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -4688,45 +4688,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 36 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(37);
-
-	var _reactRouter = __webpack_require__(213);
-
-	var _app = __webpack_require__(67);
-
-	var _app2 = _interopRequireDefault(_app);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var Root = function Root(_ref) {
-	    var store = _ref.store;
-	    return _react2.default.createElement(
-	        _reactRedux.Provider,
-	        { store: store },
-	        _react2.default.createElement(
-	            _reactRouter.Router,
-	            { history: _reactRouter.browserHistory },
-	            _react2.default.createElement(_reactRouter.Route, { path: '/players', component: _app2.default })
-	        )
-	    );
-	};
-
-	exports.default = Root;
-
-/***/ },
+/* 36 */,
 /* 37 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -6472,398 +6434,13 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 67 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _addplayer = __webpack_require__(68);
-
-	var _addplayer2 = _interopRequireDefault(_addplayer);
-
-	var _PlayerListContainer = __webpack_require__(71);
-
-	var _PlayerListContainer2 = _interopRequireDefault(_PlayerListContainer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var PlayerApp = function PlayerApp() {
-	    return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_addplayer2.default, null),
-	        _react2.default.createElement(_PlayerListContainer2.default, null)
-	    );
-	};
-
-	exports.default = PlayerApp;
-
-/***/ },
-/* 68 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(37);
-
-	var _actions = __webpack_require__(69);
-
-	var _presentation = __webpack_require__(70);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var addPlayerUrl = 'http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/addPlayer';
-
-	var AddPlayer = function AddPlayer(_ref) {
-	    var dispatch = _ref.dispatch;
-
-	    var firstName = void 0;
-	    var lastName = void 0;
-	    var email = void 0;
-
-	    return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_presentation.InputBox, { label: 'First name', value: function value(node) {
-	                return firstName = node;
-	            } }),
-	        _react2.default.createElement(_presentation.InputBox, { label: 'Last name', value: function value(node) {
-	                return lastName = node;
-	            } }),
-	        _react2.default.createElement(_presentation.InputBox, { label: 'Email', value: function value(node) {
-	                return email = node;
-	            } }),
-	        _react2.default.createElement(
-	            'button',
-	            {
-	                onClick: function onClick() {
-	                    var action = (0, _actions.savePlayer)(addPlayerUrl, {
-	                        first_name: firstName.value,
-	                        last_name: lastName.value,
-	                        email_address: email.value
-	                    });
-
-	                    dispatch(action);
-	                    firstName.value = '';
-	                    lastName.value = '';
-	                    email.value = '';
-	                } },
-	            'Add player'
-	        )
-	    );
-	};
-
-	exports.default = AddPlayer = (0, _reactRedux.connect)()(AddPlayer);
-
-/***/ },
-/* 69 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.receivePlayers = exports.fetchPlayers = exports.deletePlayer = exports.savePlayer = exports.requestPlayers = exports.removePlayer = exports.addPlayer = exports.RECEIVE_PLAYERS = exports.REQUEST_PLAYERS = exports.FETCH_PLAYERS = exports.REMOVE_PLAYER = exports.ADD_PLAYER = undefined;
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-	__webpack_require__(1);
-
-	var ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
-	var REMOVE_PLAYER = exports.REMOVE_PLAYER = 'REMOVE_PLAYER';
-	var FETCH_PLAYERS = exports.FETCH_PLAYERS = 'FETCH_PLAYERS';
-	var REQUEST_PLAYERS = exports.REQUEST_PLAYERS = 'REQUEST_PLAYERS';
-	var RECEIVE_PLAYERS = exports.RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
-
-	var addPlayer = exports.addPlayer = function addPlayer(player) {
-	    return { type: ADD_PLAYER, player: player };
-	};
-	var removePlayer = exports.removePlayer = function removePlayer(player) {
-	    return { type: REMOVE_PLAYER, player: player };
-	};
-	var requestPlayers = exports.requestPlayers = function requestPlayers() {
-	    return { type: REQUEST_PLAYERS };
-	};
-
-	var savePlayer = exports.savePlayer = function savePlayer(url, player) {
-	    return function (dispatch) {
-	        fetch(url, {
-	            method: 'POST',
-	            headers: {
-	                'Accept': 'application/json'
-	            },
-	            body: JSON.stringify({
-	                first_name: player.first_name,
-	                last_name: player.last_name,
-	                email: player.email_address
-	            })
-	        }).then(dispatch(addPlayer(player)));
-	    };
-	};
-
-	var deletePlayer = exports.deletePlayer = function deletePlayer(url, player) {
-	    return function (dispatch) {
-	        fetch(url, {
-	            method: 'POST',
-	            headers: {
-	                'Accept': 'application/json'
-	            },
-	            body: JSON.stringify({
-	                first_name: player.first_name,
-	                last_name: player.last_name,
-	                email: player.email_address
-	            })
-	        }).then(dispatch(removePlayer(player)));
-	    };
-	};
-
-	var fetchPlayers = exports.fetchPlayers = function fetchPlayers(url) {
-	    return function (dispatch) {
-	        dispatch(requestPlayers());
-	        return fetch(url).then(function (response) {
-	            return response.json();
-	        }).then(function (json) {
-	            return dispatch(receivePlayers(json));
-	        });
-	    };
-	};
-
-	var receivePlayers = exports.receivePlayers = function receivePlayers(json) {
-	    var playersArray = _typeof(json.players) === 'object' ? Object.values(json.players) : json.players;
-	    return function (dispatch) {
-	        playersArray.map(function (player) {
-	            dispatch(addPlayer(player));
-	        });
-	    };
-	};
-
-/***/ },
-/* 70 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.PlayerList = exports.Player = exports.InputBox = undefined;
-
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var InputBox = exports.InputBox = function InputBox(_ref) {
-	    var label = _ref.label,
-	        value = _ref.value;
-	    return _react2.default.createElement(
-	        "div",
-	        { className: "inputBox" },
-	        _react2.default.createElement(
-	            "label",
-	            null,
-	            label
-	        ),
-	        _react2.default.createElement("input", { ref: value })
-	    );
-	};
-
-	var Player = exports.Player = function Player(_ref2) {
-	    var first_name = _ref2.first_name,
-	        last_name = _ref2.last_name,
-	        onClick = _ref2.onClick;
-	    return _react2.default.createElement(
-	        "li",
-	        null,
-	        _react2.default.createElement(
-	            "span",
-	            null,
-	            first_name
-	        ),
-	        _react2.default.createElement(
-	            "span",
-	            null,
-	            last_name
-	        ),
-	        _react2.default.createElement(
-	            "button",
-	            { onClick: onClick },
-	            "remove"
-	        )
-	    );
-	};
-
-	var PlayerList = exports.PlayerList = function PlayerList(_ref3) {
-	    var players = _ref3.players,
-	        visibility = _ref3.visibility,
-	        onRemovePlayer = _ref3.onRemovePlayer;
-	    return _react2.default.createElement(
-	        "ul",
-	        { className: visibility },
-	        players.map(function (player) {
-	            return _react2.default.createElement(Player, _extends({
-	                key: player.email_address
-	            }, player, {
-	                onClick: function onClick() {
-	                    return onRemovePlayer(player);
-	                }
-	            }));
-	        })
-	    );
-	};
-
-/***/ },
-/* 71 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _reactRedux = __webpack_require__(37);
-
-	var _presentation = __webpack_require__(70);
-
-	var _actions = __webpack_require__(69);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var url = 'http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/removePlayer';
-
-	var mapStateToPlayerProps = function mapStateToPlayerProps(state) {
-	    return {
-	        players: state.players,
-	        visibility: state.visibility
-	    };
-	};
-
-	var mapDispatchToPlayerProps = function mapDispatchToPlayerProps(dispatch) {
-	    return {
-	        onRemovePlayer: function onRemovePlayer(player) {
-	            dispatch((0, _actions.deletePlayer)(url, player));
-	        }
-	    };
-	};
-
-	var PlayerListContainer = (0, _reactRedux.connect)(mapStateToPlayerProps, mapDispatchToPlayerProps)(_presentation.PlayerList);
-
-	exports.default = PlayerListContainer;
-
-/***/ },
-/* 72 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.configureStore = undefined;
-
-	var _redux = __webpack_require__(44);
-
-	var _reduxThunk = __webpack_require__(74);
-
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _actions = __webpack_require__(69);
-
-	var _reducer = __webpack_require__(73);
-
-	var _reducer2 = _interopRequireDefault(_reducer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var configureStore = exports.configureStore = function configureStore() {
-	    var store = (0, _redux.createStore)(_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-
-	    store.dispatch((0, _actions.fetchPlayers)('http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/showPlayers'));
-	    return store;
-	};
-
-/***/ },
-/* 73 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _redux = __webpack_require__(44);
-
-	var _actions = __webpack_require__(69);
-
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-	var VISIBILITY_FETCHING_PLAYERS = 'hidden';
-	var VISIBILITY_LOADING_SUCCESSFULL = 'visible';
-
-	var players = function players() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-	    var action = arguments[1];
-
-	    switch (action.type) {
-	        case _actions.ADD_PLAYER:
-	            return [].concat(_toConsumableArray(state), [action.player]);
-	        case _actions.REMOVE_PLAYER:
-	            return state.filter(function (player) {
-	                return player.email_address !== action.player.email_address;
-	            });
-	        default:
-	            return state;
-	    }
-	};
-
-	var visibility = function visibility() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : VISIBILITY_FETCHING_PLAYERS;
-	    var action = arguments[1];
-
-	    switch (action.type) {
-	        case _actions.REQUEST_PLAYERS:
-	            return VISIBILITY_FETCHING_PLAYERS;
-	        case _actions.ADD_PLAYER:
-	            return VISIBILITY_LOADING_SUCCESSFULL;
-	        default:
-	            return state;
-	    }
-	};
-
-	var reducer = (0, _redux.combineReducers)({
-	    players: players,
-	    visibility: visibility
-	});
-
-	exports.default = reducer;
-
-/***/ },
+/* 67 */,
+/* 68 */,
+/* 69 */,
+/* 70 */,
+/* 71 */,
+/* 72 */,
+/* 73 */,
 /* 74 */
 /***/ function(module, exports) {
 
@@ -28872,6 +28449,481 @@
 	  });
 	};
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
+
+/***/ },
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(37);
+
+	var _reactRouter = __webpack_require__(213);
+
+	var _app = __webpack_require__(271);
+
+	var _app2 = _interopRequireDefault(_app);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Root = function Root(_ref) {
+	    var store = _ref.store;
+	    return _react2.default.createElement(
+	        _reactRedux.Provider,
+	        { store: store },
+	        _react2.default.createElement(
+	            _reactRouter.Router,
+	            { history: _reactRouter.browserHistory },
+	            _react2.default.createElement(_reactRouter.Route, { path: '/players', component: _app2.default })
+	        )
+	    );
+	};
+
+	exports.default = Root;
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _addplayer = __webpack_require__(272);
+
+	var _addplayer2 = _interopRequireDefault(_addplayer);
+
+	var _PlayerListContainer = __webpack_require__(275);
+
+	var _PlayerListContainer2 = _interopRequireDefault(_PlayerListContainer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PlayerApp = function PlayerApp() {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_addplayer2.default, null),
+	        _react2.default.createElement(_PlayerListContainer2.default, null)
+	    );
+	};
+
+	exports.default = PlayerApp;
+
+/***/ },
+/* 272 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(37);
+
+	var _actions = __webpack_require__(273);
+
+	var _presentation = __webpack_require__(274);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var addPlayerUrl = 'http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/addPlayer';
+
+	var AddPlayer = function AddPlayer(_ref) {
+	    var dispatch = _ref.dispatch;
+
+	    var firstName = void 0;
+	    var lastName = void 0;
+	    var email = void 0;
+
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_presentation.InputBox, { label: 'First name', value: function value(node) {
+	                return firstName = node;
+	            } }),
+	        _react2.default.createElement(_presentation.InputBox, { label: 'Last name', value: function value(node) {
+	                return lastName = node;
+	            } }),
+	        _react2.default.createElement(_presentation.InputBox, { label: 'Email', value: function value(node) {
+	                return email = node;
+	            } }),
+	        _react2.default.createElement(
+	            'button',
+	            {
+	                onClick: function onClick() {
+	                    var action = (0, _actions.savePlayer)(addPlayerUrl, {
+	                        first_name: firstName.value,
+	                        last_name: lastName.value,
+	                        email_address: email.value
+	                    });
+
+	                    dispatch(action);
+	                    firstName.value = '';
+	                    lastName.value = '';
+	                    email.value = '';
+	                } },
+	            'Add player'
+	        )
+	    );
+	};
+
+	exports.default = AddPlayer = (0, _reactRedux.connect)()(AddPlayer);
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.receivePlayers = exports.fetchPlayers = exports.deletePlayer = exports.savePlayer = exports.requestPlayers = exports.removePlayer = exports.addPlayer = exports.RECEIVE_PLAYERS = exports.REQUEST_PLAYERS = exports.FETCH_PLAYERS = exports.REMOVE_PLAYER = exports.ADD_PLAYER = undefined;
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	__webpack_require__(1);
+
+	var ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
+	var REMOVE_PLAYER = exports.REMOVE_PLAYER = 'REMOVE_PLAYER';
+	var FETCH_PLAYERS = exports.FETCH_PLAYERS = 'FETCH_PLAYERS';
+	var REQUEST_PLAYERS = exports.REQUEST_PLAYERS = 'REQUEST_PLAYERS';
+	var RECEIVE_PLAYERS = exports.RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
+
+	var addPlayer = exports.addPlayer = function addPlayer(player) {
+	    return { type: ADD_PLAYER, player: player };
+	};
+	var removePlayer = exports.removePlayer = function removePlayer(player) {
+	    return { type: REMOVE_PLAYER, player: player };
+	};
+	var requestPlayers = exports.requestPlayers = function requestPlayers() {
+	    return { type: REQUEST_PLAYERS };
+	};
+
+	var savePlayer = exports.savePlayer = function savePlayer(url, player) {
+	    return function (dispatch) {
+	        fetch(url, {
+	            method: 'POST',
+	            headers: {
+	                'Accept': 'application/json'
+	            },
+	            body: JSON.stringify({
+	                first_name: player.first_name,
+	                last_name: player.last_name,
+	                email: player.email_address
+	            })
+	        }).then(dispatch(addPlayer(player)));
+	    };
+	};
+
+	var deletePlayer = exports.deletePlayer = function deletePlayer(url, player) {
+	    return function (dispatch) {
+	        fetch(url, {
+	            method: 'POST',
+	            headers: {
+	                'Accept': 'application/json'
+	            },
+	            body: JSON.stringify({
+	                first_name: player.first_name,
+	                last_name: player.last_name,
+	                email: player.email_address
+	            })
+	        }).then(dispatch(removePlayer(player)));
+	    };
+	};
+
+	var fetchPlayers = exports.fetchPlayers = function fetchPlayers(url) {
+	    return function (dispatch) {
+	        dispatch(requestPlayers());
+	        return fetch(url).then(function (response) {
+	            return response.json();
+	        }).then(function (json) {
+	            return dispatch(receivePlayers(json));
+	        });
+	    };
+	};
+
+	var receivePlayers = exports.receivePlayers = function receivePlayers(json) {
+	    var playersArray = _typeof(json.players) === 'object' ? Object.values(json.players) : json.players;
+	    return function (dispatch) {
+	        playersArray.map(function (player) {
+	            dispatch(addPlayer(player));
+	        });
+	    };
+	};
+
+/***/ },
+/* 274 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.PlayerList = exports.Player = exports.InputBox = undefined;
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var InputBox = exports.InputBox = function InputBox(_ref) {
+	    var label = _ref.label,
+	        value = _ref.value;
+	    return _react2.default.createElement(
+	        "div",
+	        { className: "inputBox" },
+	        _react2.default.createElement(
+	            "label",
+	            null,
+	            label
+	        ),
+	        _react2.default.createElement("input", { ref: value })
+	    );
+	};
+
+	var Player = exports.Player = function Player(_ref2) {
+	    var first_name = _ref2.first_name,
+	        last_name = _ref2.last_name,
+	        onClick = _ref2.onClick;
+	    return _react2.default.createElement(
+	        "li",
+	        null,
+	        _react2.default.createElement(
+	            "span",
+	            null,
+	            first_name
+	        ),
+	        _react2.default.createElement(
+	            "span",
+	            null,
+	            last_name
+	        ),
+	        _react2.default.createElement(
+	            "button",
+	            { onClick: onClick },
+	            "remove"
+	        )
+	    );
+	};
+
+	var PlayerList = exports.PlayerList = function PlayerList(_ref3) {
+	    var players = _ref3.players,
+	        visibility = _ref3.visibility,
+	        onRemovePlayer = _ref3.onRemovePlayer;
+	    return _react2.default.createElement(
+	        "ul",
+	        { className: visibility },
+	        players.map(function (player) {
+	            return _react2.default.createElement(Player, _extends({
+	                key: player.email_address
+	            }, player, {
+	                onClick: function onClick() {
+	                    return onRemovePlayer(player);
+	                }
+	            }));
+	        })
+	    );
+	};
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(37);
+
+	var _presentation = __webpack_require__(274);
+
+	var _actions = __webpack_require__(273);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var url = 'http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/removePlayer';
+
+	var mapStateToPlayerProps = function mapStateToPlayerProps(state) {
+	    return {
+	        players: state.players,
+	        visibility: state.visibility
+	    };
+	};
+
+	var mapDispatchToPlayerProps = function mapDispatchToPlayerProps(dispatch) {
+	    return {
+	        onRemovePlayer: function onRemovePlayer(player) {
+	            dispatch((0, _actions.deletePlayer)(url, player));
+	        }
+	    };
+	};
+
+	var PlayerListContainer = (0, _reactRedux.connect)(mapStateToPlayerProps, mapDispatchToPlayerProps)(_presentation.PlayerList);
+
+	exports.default = PlayerListContainer;
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.configureStore = undefined;
+
+	var _redux = __webpack_require__(44);
+
+	var _reduxThunk = __webpack_require__(74);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _actions = __webpack_require__(273);
+
+	var _reducers = __webpack_require__(277);
+
+	var _reducers2 = _interopRequireDefault(_reducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var configureStore = exports.configureStore = function configureStore() {
+	    var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+	    store.dispatch((0, _actions.fetchPlayers)('http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/showPlayers'));
+	    return store;
+	};
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _redux = __webpack_require__(44);
+
+	var _players = __webpack_require__(278);
+
+	var _players2 = _interopRequireDefault(_players);
+
+	var _applicationState = __webpack_require__(279);
+
+	var _applicationState2 = _interopRequireDefault(_applicationState);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var reducer = (0, _redux.combineReducers)({
+	    players: _players2.default,
+	    applicationState: _applicationState2.default
+	});
+
+	exports.default = reducer;
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _actions = __webpack_require__(273);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var players = function players() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _actions.ADD_PLAYER:
+	            return [].concat(_toConsumableArray(state), [action.player]);
+	        case _actions.REMOVE_PLAYER:
+	            return state.filter(function (player) {
+	                return player.email_address !== action.player.email_address;
+	            });
+	        default:
+	            return state;
+	    }
+	};
+
+	exports.default = players;
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.STATE_SERVER_ERROR = exports.STATE_NO_INTERACTION = exports.STATE_DELETE_PLAYER = exports.STATE_SAVE_PLAYER = exports.STATE_FETCH_PLAYERS = undefined;
+
+	var _actions = __webpack_require__(273);
+
+	var STATE_FETCH_PLAYERS = exports.STATE_FETCH_PLAYERS = 'STATE_FETCH_PLAYERS';
+	var STATE_SAVE_PLAYER = exports.STATE_SAVE_PLAYER = 'STATE_SAVE_PLAYER';
+	var STATE_DELETE_PLAYER = exports.STATE_DELETE_PLAYER = 'STATE_DELETE_PLAYER';
+	var STATE_NO_INTERACTION = exports.STATE_NO_INTERACTION = 'STATE_NO_INTERACTION';
+	var STATE_SERVER_ERROR = exports.STATE_SERVER_ERROR = 'STATE_SERVER_ERROR;';
+
+	var applicationState = function applicationState() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : STATE_FETCH_PLAYERS;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _actions.REQUEST_PLAYERS:
+	            return STATE_FETCH_PLAYERS;
+	        case _actions.ADD_PLAYER:
+	            return STATE_NO_INTERACTION;
+	        default:
+	            return state;
+	    }
+	};
+
+	exports.default = applicationState;
 
 /***/ }
 /******/ ]);

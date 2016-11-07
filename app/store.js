@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { fetchPlayers } from './actions';
-import reducer from './reducer.js';
+import reducer from './reducers';
 
 export const configureStore = () => {
     const store = createStore(reducer, applyMiddleware(

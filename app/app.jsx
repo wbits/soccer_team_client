@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import Root from './players/components/root';
-import { configureStore } from './players/store';
+import Root from './components/root';
+import { configureStore } from './store';
 
 const store = configureStore();
 
