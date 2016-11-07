@@ -1,3 +1,11 @@
-import { renderPlayerList } from './players';
+import React from 'react';
+import { render } from 'react-dom';
+import Root from './players/components/root';
+import { configureStore } from './players/store';
 
-renderPlayerList();
+const store = configureStore();
+
+render(
+    <Root store={store} />,
+    document.getElementById('root')
+);

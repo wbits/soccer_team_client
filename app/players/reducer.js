@@ -4,7 +4,7 @@ import { REQUEST_PLAYERS, ADD_PLAYER, REMOVE_PLAYER } from './actions';
 const VISIBILITY_FETCHING_PLAYERS    = 'hidden';
 const VISIBILITY_LOADING_SUCCESSFULL = 'visible';
 
-function players(state = [], action) {
+const players = (state = [], action) => {
     switch(action.type) {
         case ADD_PLAYER:
             return [
@@ -20,7 +20,7 @@ function players(state = [], action) {
     }
 }
 
-function visibility(state = VISIBILITY_FETCHING_PLAYERS, action) {
+const visibility = (state = VISIBILITY_FETCHING_PLAYERS, action) => {
     switch(action.type) {
         case REQUEST_PLAYERS:
             return VISIBILITY_FETCHING_PLAYERS;
