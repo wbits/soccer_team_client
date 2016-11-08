@@ -1,6 +1,6 @@
 import React from 'react';
 import AddPlayer from './addplayer';
-import PlayerListContainer from './PlayerListContainer';
+import PlayerListContainer from './playerListContainer';
 
 const PlayerApp = () => (
     <div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { savePlayer } from './../actions';
-import { InputBox } from './presentation';
+import savePlayer from './../actions/savePlayer';
+import InputBox from './inputBox';
 
 const addPlayerUrl = 'http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/addPlayer';
 

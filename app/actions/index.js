@@ -10,40 +10,6 @@ export const addPlayer      = (player) => ({ type: ADD_PLAYER, player });
 export const removePlayer   = (player) => ({ type: REMOVE_PLAYER, player });
 export const requestPlayers = () => ({ type: REQUEST_PLAYERS });
 
-export const savePlayer = (url, player) => {
-    return (dispatch) => {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                first_name: player.first_name,
-                last_name: player.last_name,
-                email: player.email_address
-            })
-        })
-        .then(dispatch(addPlayer(player)));
-    }
-}
-
-export const deletePlayer = (url, player) => {
-    return (dispatch) => {
-        fetch(url, {    
-           method: 'POST',
-            headers: {
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-                first_name: player.first_name,
-                last_name: player.last_name,
-                email: player.email_address
-            }) 
-        })
-        .then(dispatch(removePlayer(player)));
-    }
-}
-
 export const fetchPlayers = (url) => {
     return (dispatch) => {
         dispatch(requestPlayers());
