@@ -1,109 +1,62 @@
 import React from 'react';
-import { render } from 'react-dom';
-import 'react-widgets/lib/less/react-widgets.less';
-import DateTimePicker from'react-widgets/lib/DateTimePicker';
+import DateTimeInput from './dateTimeInput';
 import moment from 'moment';
 import momentLocalizer from 'react-widgets/lib/localizers/moment';
+import { Field, reduxForm } from 'redux-form';
 
-class ScheduleMatchForm extends React.Component {
-  constructor(props) {
-    super(props);
-    
-    this.handleClubChange    = this.handleClubChange.bind(this);
-    this.handleTeamChange    = this.handleTeamChange.bind(this);
-    this.handleKickoffChange = this.handleKickoffChange.bind(this);
-    this.handleMatchIdChange = this.handleMatchIdChange.bind(this);
-    this.handleSubmit        = this.handleSubmit.bind(this);
+momentLocalizer(moment);
 
-    momentLocalizer(moment);
-
-    let address = {
-        street: '',
-        house_number: '',
-        postal_code: '',
-        city: ''
-    }
-
-    let opponent = {
-        club: '',
-        team: '',
-        address    
-    }
-
-    this.state = {
-        match_id: '', 
-        kickoff: '',
-        opponent
-    };
-  }
-
-  handleClubChange(e) {
-    this.handleChange('club', e.target.value);
-  }
-
-  handleTeamChange(e) {
-    this.handleChange('team', e.target.value);
-  }
-
-  handleKickoffChange(value) {
-    this.handleChange('kickoff', value);
-  }
-
-  handleMatchIdChange(e) {
-    this.handleChange('match_id', e.target.value);
-  }
-
-  handleChange(key, value)
-  {
-    let state = this.state;
-    switch (key) {
-        case 'match_id':
-            state.match_id = value;
-            break;
-        case 'kickoff':
-            state.kickoff = moment(value, moment.ISO_8601).format();
-            break;
-        case 'club':
-            state.opponent.club = value;
-            break;
-        case 'team':
-            state.opponent.team = value;
-            break;
-    }
-
-    this.setState(state);
-  }
-
-
-  handleSubmit(e) {
-    e.preventDefault();
-
-    console.log(this.state);    
-  }
-
-  render() {
+let ScheduleMatchForm = props => {
+    const { handleSubmit } = props;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Match number:
-          <input type="text" value={this.state.opponent.match_id} onChange={this.handleMatchIdChange} />
-        </label>
-        <label>
-          Club:
-          <input type="text" value={this.state.opponent.club} onChange={this.handleClubChange} />
-        </label>
-        <label>
-          Team:
-          <input type="text" value={this.state.opponent.team} onChange={this.handleTeamChange} />
-        </label>
-        <label>
-          Kickoff:
-        <DateTimePicker onChange={this.handleKickoffChange.bind()} />
-        </label>
-        <input type="submit" value="Submit" />
+      <form onSubmit={handleSubmit}>
+        <fieldset>
+            <legend>Match:</legend>
+            <div>
+              <label htmlFor="match_id">Match number:</label>
+              <Field name="match_id" component="input" type="text"/>
+            </div>
+            <div>
+              <label htmlFor="kickoff">Kickoff</label>
+              <Field
+                name="kickoff"
+                component={DateTimeInput} />   
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Opponent:</legend>
+            <div>
+              <label htmlFor="club">Club:</label>
+              <Field name="club" component="input" type="text"/>
+            </div>
+            <div>
+              <label htmlFor="team">Team:</label>
+              <Field name="team" component="input" type="text"/>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Address:</legend>
+            <div>
+              <label htmlFor="street">Street:</label>
+              <Field name="street" component="input" type="text"/>
+              <label htmlFor="house_number">Number:</label>
+              <Field name="house_number" component="input" type="text"/>
+            </div>
+            <div>
+              <label htmlFor="postal_code">Postal code:</label>
+              <Field name="postal_code" component="input" type="text"/>
+              <label htmlFor="city">City:</label>
+              <Field name="city" component="input" type="text"/>
+            </div>
+        </fieldset>
+        
+        <button type="submit">Submit</button>
       </form>
     );
-  }
 }
+
+ScheduleMatchForm = reduxForm({
+  form: 'scheduleMatch'
+})(ScheduleMatchForm);
 
 export default ScheduleMatchForm;
