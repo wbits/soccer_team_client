@@ -5,6 +5,7 @@ const Navigation = () => (
     <div>
         <Link to="/players">Players</Link>
         <Link to="/matches">Matches</Link>
+        <Link to="/scheduleMatch">Schedule match</Link>
     </div>
 );
 
