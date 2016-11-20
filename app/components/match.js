@@ -5,9 +5,9 @@ const Match = ({
     kickoff,
     opponent
 }) => (
-    <div id={match_id>
+    <div id={match_id}>
         <b>{opponent.club} {opponent.team}</b>
-        <span>{kickoff}<span>
+        <span>{kickoff}</span>
     </div>
 );
 

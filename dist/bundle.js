@@ -503,7 +503,7 @@
 
 	var _root2 = _interopRequireDefault(_root);
 
-	var _store = __webpack_require__(267);
+	var _store = __webpack_require__(262);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21896,9 +21896,13 @@
 
 	var _reactRouter = __webpack_require__(205);
 
-	var _playerApp = __webpack_require__(274);
+	var _playerApp = __webpack_require__(270);
 
 	var _playerApp2 = _interopRequireDefault(_playerApp);
+
+	var _matchApp = __webpack_require__(258);
+
+	var _matchApp2 = _interopRequireDefault(_matchApp);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21910,7 +21914,8 @@
 	        _react2.default.createElement(
 	            _reactRouter.Router,
 	            { history: _reactRouter.browserHistory },
-	            _react2.default.createElement(_reactRouter.Route, { path: '/players', component: _playerApp2.default })
+	            _react2.default.createElement(_reactRouter.Route, { path: '/players', component: _playerApp2.default }),
+	            _react2.default.createElement(_reactRouter.Route, { path: '/matches', component: _matchApp2.default })
 	        )
 	    );
 	};
@@ -28454,7 +28459,41 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 258 */,
+/* 258 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _matchListContainer = __webpack_require__(259);
+
+	var _matchListContainer2 = _interopRequireDefault(_matchListContainer);
+
+	var _navigation = __webpack_require__(281);
+
+	var _navigation2 = _interopRequireDefault(_navigation);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MatchApp = function MatchApp() {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_navigation2.default, null),
+	        _react2.default.createElement(_matchListContainer2.default, null)
+	    );
+	};
+
+	exports.default = MatchApp;
+
+/***/ },
 /* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28470,11 +28509,430 @@
 
 	var _reactRedux = __webpack_require__(175);
 
-	var _savePlayer = __webpack_require__(260);
+	var _matchList = __webpack_require__(260);
+
+	var _matchList2 = _interopRequireDefault(_matchList);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {
+	        matches: state.matches
+	    };
+	};
+
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return {};
+	};
+
+	var MatchListContainer = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_matchList2.default);
+
+	exports.default = MatchListContainer;
+
+/***/ },
+/* 260 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _match = __webpack_require__(261);
+
+	var _match2 = _interopRequireDefault(_match);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var MatchList = function MatchList(_ref) {
+	    var matches = _ref.matches;
+	    return _react2.default.createElement(
+	        'ul',
+	        null,
+	        matches.map(function (match) {
+	            return _react2.default.createElement(_match2.default, _extends({
+	                key: match.match_id
+	            }, match));
+	        })
+	    );
+	};
+
+	exports.default = MatchList;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var Match = function Match(_ref) {
+	    var match_id = _ref.match_id,
+	        kickoff = _ref.kickoff,
+	        opponent = _ref.opponent;
+	    return _react2.default.createElement(
+	        'div',
+	        { id: match_id },
+	        _react2.default.createElement(
+	            'b',
+	            null,
+	            opponent.club,
+	            ' ',
+	            opponent.team
+	        ),
+	        _react2.default.createElement(
+	            'span',
+	            null,
+	            kickoff
+	        )
+	    );
+	};
+
+	exports.default = Match;
+
+/***/ },
+/* 262 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.configureStore = undefined;
+
+	var _redux = __webpack_require__(182);
+
+	var _reduxThunk = __webpack_require__(263);
+
+	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
+
+	var _fetchPlayers = __webpack_require__(264);
+
+	var _fetchPlayers2 = _interopRequireDefault(_fetchPlayers);
+
+	var _fetchMatches = __webpack_require__(278);
+
+	var _fetchMatches2 = _interopRequireDefault(_fetchMatches);
+
+	var _reducers = __webpack_require__(267);
+
+	var _reducers2 = _interopRequireDefault(_reducers);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var configureStore = exports.configureStore = function configureStore() {
+	    var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
+
+	    store.dispatch((0, _fetchPlayers2.default)('http://192.168.99.100:8000/team/d5cf8e25-cfa2-4b98-a40d-ece18dc0816b/players'));
+	    store.dispatch((0, _fetchMatches2.default)('http://192.168.99.100:8000/team/d5cf8e25-cfa2-4b98-a40d-ece18dc0816b/matches'));
+
+	    return store;
+	};
+
+/***/ },
+/* 263 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	exports.__esModule = true;
+	function createThunkMiddleware(extraArgument) {
+	  return function (_ref) {
+	    var dispatch = _ref.dispatch;
+	    var getState = _ref.getState;
+	    return function (next) {
+	      return function (action) {
+	        if (typeof action === 'function') {
+	          return action(dispatch, getState, extraArgument);
+	        }
+
+	        return next(action);
+	      };
+	    };
+	  };
+	}
+
+	var thunk = createThunkMiddleware();
+	thunk.withExtraArgument = createThunkMiddleware;
+
+	exports['default'] = thunk;
+
+/***/ },
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(1);
+
+	var _receivePlayers = __webpack_require__(265);
+
+	var _receivePlayers2 = _interopRequireDefault(_receivePlayers);
+
+	var _index = __webpack_require__(266);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var fetchPlayers = function fetchPlayers(url) {
+	    return function (dispatch) {
+	        dispatch((0, _index.requestPlayers)());
+	        return fetch(url).then(function (response) {
+	            return response.json();
+	        }).then(function (json) {
+	            return dispatch((0, _receivePlayers2.default)(json));
+	        });
+	    };
+	};
+
+	exports.default = fetchPlayers;
+
+/***/ },
+/* 265 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _index = __webpack_require__(266);
+
+	var receivePlayers = function receivePlayers(json) {
+	    var playersArray = _typeof(json.players) === 'object' ? Object.values(json.players) : json.players;
+	    return function (dispatch) {
+	        playersArray.map(function (player) {
+	            dispatch((0, _index.addPlayer)(player));
+	        });
+	    };
+	};
+
+	exports.default = receivePlayers;
+
+/***/ },
+/* 266 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
+	var ADD_MATCH = exports.ADD_MATCH = 'ADD_MATCH';
+	var REMOVE_PLAYER = exports.REMOVE_PLAYER = 'REMOVE_PLAYER';
+	var CANCEL_MATCH = exports.CANCEL_MATCH = 'CANCEL_MATCH';
+	var FETCH_PLAYERS = exports.FETCH_PLAYERS = 'FETCH_PLAYERS';
+	var FETCH_MATCHES = exports.FETCH_MATCHES = 'FETCH_MATCHES';
+	var REQUEST_PLAYERS = exports.REQUEST_PLAYERS = 'REQUEST_PLAYERS';
+	var REQUEST_MATCHES = exports.REQUEST_MATCHES = 'REQUEST_MATCHES';
+	var RECEIVE_PLAYERS = exports.RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
+	var RECEIVE_MATCHES = exports.RECEIVE_MATCHES = 'RECEIVE_MATCHES';
+
+	var addPlayer = exports.addPlayer = function addPlayer(player) {
+	  return { type: ADD_PLAYER, player: player };
+	};
+	var removePlayer = exports.removePlayer = function removePlayer(player) {
+	  return { type: REMOVE_PLAYER, player: player };
+	};
+	var addMatch = exports.addMatch = function addMatch(match) {
+	  return { type: ADD_MATCH, match: match };
+	};
+	var cancelMatch = exports.cancelMatch = function cancelMatch(match) {
+	  return { type: CANCEL_MATCH, match: match };
+	};
+	var requestPlayers = exports.requestPlayers = function requestPlayers() {
+	  return { type: REQUEST_PLAYERS };
+	};
+	var requestMatches = exports.requestMatches = function requestMatches() {
+	  return { type: REQUEST_MATCHES };
+	};
+
+/***/ },
+/* 267 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _redux = __webpack_require__(182);
+
+	var _players = __webpack_require__(268);
+
+	var _players2 = _interopRequireDefault(_players);
+
+	var _matches = __webpack_require__(280);
+
+	var _matches2 = _interopRequireDefault(_matches);
+
+	var _applicationState = __webpack_require__(269);
+
+	var _applicationState2 = _interopRequireDefault(_applicationState);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var reducer = (0, _redux.combineReducers)({
+	    players: _players2.default,
+	    matches: _matches2.default,
+	    applicationState: _applicationState2.default
+	});
+
+	exports.default = reducer;
+
+/***/ },
+/* 268 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _actions = __webpack_require__(266);
+
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+	var players = function players() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _actions.ADD_PLAYER:
+	            return [].concat(_toConsumableArray(state), [action.player]);
+	        case _actions.REMOVE_PLAYER:
+	            return state.filter(function (player) {
+	                return player.email !== action.player.email;
+	            });
+	        default:
+	            return state;
+	    }
+	};
+
+	exports.default = players;
+
+/***/ },
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.STATE_SERVER_ERROR = exports.STATE_NO_INTERACTION = exports.STATE_DELETE_PLAYER = exports.STATE_SAVE_PLAYER = exports.STATE_FETCH_PLAYERS = undefined;
+
+	var _actions = __webpack_require__(266);
+
+	var STATE_FETCH_PLAYERS = exports.STATE_FETCH_PLAYERS = 'STATE_FETCH_PLAYERS';
+	var STATE_SAVE_PLAYER = exports.STATE_SAVE_PLAYER = 'STATE_SAVE_PLAYER';
+	var STATE_DELETE_PLAYER = exports.STATE_DELETE_PLAYER = 'STATE_DELETE_PLAYER';
+	var STATE_NO_INTERACTION = exports.STATE_NO_INTERACTION = 'STATE_NO_INTERACTION';
+	var STATE_SERVER_ERROR = exports.STATE_SERVER_ERROR = 'STATE_SERVER_ERROR;';
+
+	var applicationState = function applicationState() {
+	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : STATE_FETCH_PLAYERS;
+	    var action = arguments[1];
+
+	    switch (action.type) {
+	        case _actions.REQUEST_PLAYERS:
+	            return STATE_FETCH_PLAYERS;
+	        case _actions.ADD_PLAYER:
+	            return STATE_NO_INTERACTION;
+	        default:
+	            return state;
+	    }
+	};
+
+	exports.default = applicationState;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _addplayer = __webpack_require__(271);
+
+	var _addplayer2 = _interopRequireDefault(_addplayer);
+
+	var _playerListContainer = __webpack_require__(274);
+
+	var _playerListContainer2 = _interopRequireDefault(_playerListContainer);
+
+	var _navigation = __webpack_require__(281);
+
+	var _navigation2 = _interopRequireDefault(_navigation);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PlayerApp = function PlayerApp() {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_navigation2.default, null),
+	        _react2.default.createElement(_addplayer2.default, null),
+	        _react2.default.createElement(_playerListContainer2.default, null)
+	    );
+	};
+
+	exports.default = PlayerApp;
+
+/***/ },
+/* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _react = __webpack_require__(3);
+
+	var _react2 = _interopRequireDefault(_react);
+
+	var _reactRedux = __webpack_require__(175);
+
+	var _savePlayer = __webpack_require__(272);
 
 	var _savePlayer2 = _interopRequireDefault(_savePlayer);
 
-	var _inputBox = __webpack_require__(262);
+	var _inputBox = __webpack_require__(273);
 
 	var _inputBox2 = _interopRequireDefault(_inputBox);
 
@@ -28518,7 +28976,7 @@
 	exports.default = AddPlayer = (0, _reactRedux.connect)()(AddPlayer);
 
 /***/ },
-/* 260 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28527,7 +28985,7 @@
 	    value: true
 	});
 
-	var _index = __webpack_require__(261);
+	var _index = __webpack_require__(266);
 
 	var savePlayer = function savePlayer(url, player) {
 	    return function (dispatch) {
@@ -28547,32 +29005,7 @@
 	exports.default = savePlayer;
 
 /***/ },
-/* 261 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	var ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
-	var REMOVE_PLAYER = exports.REMOVE_PLAYER = 'REMOVE_PLAYER';
-	var FETCH_PLAYERS = exports.FETCH_PLAYERS = 'FETCH_PLAYERS';
-	var REQUEST_PLAYERS = exports.REQUEST_PLAYERS = 'REQUEST_PLAYERS';
-	var RECEIVE_PLAYERS = exports.RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
-
-	var addPlayer = exports.addPlayer = function addPlayer(player) {
-	  return { type: ADD_PLAYER, player: player };
-	};
-	var removePlayer = exports.removePlayer = function removePlayer(player) {
-	  return { type: REMOVE_PLAYER, player: player };
-	};
-	var requestPlayers = exports.requestPlayers = function requestPlayers() {
-	  return { type: REQUEST_PLAYERS };
-	};
-
-/***/ },
-/* 262 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28605,7 +29038,7 @@
 	exports.default = InputBox;
 
 /***/ },
-/* 263 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28620,11 +29053,11 @@
 
 	var _reactRedux = __webpack_require__(175);
 
-	var _deletePlayer = __webpack_require__(264);
+	var _deletePlayer = __webpack_require__(275);
 
 	var _deletePlayer2 = _interopRequireDefault(_deletePlayer);
 
-	var _playerList = __webpack_require__(265);
+	var _playerList = __webpack_require__(276);
 
 	var _playerList2 = _interopRequireDefault(_playerList);
 
@@ -28652,7 +29085,7 @@
 	exports.default = PlayerListContainer;
 
 /***/ },
-/* 264 */
+/* 275 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28661,7 +29094,7 @@
 	    value: true
 	});
 
-	var _index = __webpack_require__(261);
+	var _index = __webpack_require__(266);
 
 	var deletePlayer = function deletePlayer(url, player) {
 	    return function (dispatch) {
@@ -28681,7 +29114,7 @@
 	exports.default = deletePlayer;
 
 /***/ },
-/* 265 */
+/* 276 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28696,7 +29129,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _player = __webpack_require__(266);
+	var _player = __webpack_require__(277);
 
 	var _player2 = _interopRequireDefault(_player);
 
@@ -28724,7 +29157,7 @@
 	exports.default = PlayerList;
 
 /***/ },
-/* 266 */
+/* 277 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28761,69 +29194,7 @@
 	exports.default = Player;
 
 /***/ },
-/* 267 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.configureStore = undefined;
-
-	var _redux = __webpack_require__(182);
-
-	var _reduxThunk = __webpack_require__(268);
-
-	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
-
-	var _fetchPlayers = __webpack_require__(269);
-
-	var _fetchPlayers2 = _interopRequireDefault(_fetchPlayers);
-
-	var _reducers = __webpack_require__(271);
-
-	var _reducers2 = _interopRequireDefault(_reducers);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var configureStore = exports.configureStore = function configureStore() {
-	    var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
-
-	    store.dispatch((0, _fetchPlayers2.default)('http://192.168.99.100:8000/team/d5cf8e25-cfa2-4b98-a40d-ece18dc0816b/players'));
-	    return store;
-	};
-
-/***/ },
-/* 268 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	exports.__esModule = true;
-	function createThunkMiddleware(extraArgument) {
-	  return function (_ref) {
-	    var dispatch = _ref.dispatch;
-	    var getState = _ref.getState;
-	    return function (next) {
-	      return function (action) {
-	        if (typeof action === 'function') {
-	          return action(dispatch, getState, extraArgument);
-	        }
-
-	        return next(action);
-	      };
-	    };
-	  };
-	}
-
-	var thunk = createThunkMiddleware();
-	thunk.withExtraArgument = createThunkMiddleware;
-
-	exports['default'] = thunk;
-
-/***/ },
-/* 269 */
+/* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28834,29 +29205,29 @@
 
 	__webpack_require__(1);
 
-	var _receivePlayers = __webpack_require__(270);
+	var _receiveMatches = __webpack_require__(279);
 
-	var _receivePlayers2 = _interopRequireDefault(_receivePlayers);
+	var _receiveMatches2 = _interopRequireDefault(_receiveMatches);
 
-	var _index = __webpack_require__(261);
+	var _index = __webpack_require__(266);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var fetchPlayers = function fetchPlayers(url) {
+	var fetchMatches = function fetchMatches(url) {
 	    return function (dispatch) {
-	        dispatch((0, _index.requestPlayers)());
+	        dispatch((0, _index.requestMatches)());
 	        return fetch(url).then(function (response) {
 	            return response.json();
 	        }).then(function (json) {
-	            return dispatch((0, _receivePlayers2.default)(json));
+	            return dispatch((0, _receiveMatches2.default)(json));
 	        });
 	    };
 	};
 
-	exports.default = fetchPlayers;
+	exports.default = fetchMatches;
 
 /***/ },
-/* 270 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28867,21 +29238,22 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
-	var _index = __webpack_require__(261);
+	var _index = __webpack_require__(266);
 
-	var receivePlayers = function receivePlayers(json) {
-	    var playersArray = _typeof(json.players) === 'object' ? Object.values(json.players) : json.players;
+	var receiveMatches = function receiveMatches(json) {
+	    var matchesArray = _typeof(json.matches) === 'object' ? Object.values(json.matches) : json.matches;
+
 	    return function (dispatch) {
-	        playersArray.map(function (player) {
-	            dispatch((0, _index.addPlayer)(player));
+	        matchesArray.map(function (match) {
+	            dispatch((0, _index.addMatch)(match));
 	        });
 	    };
 	};
 
-	exports.default = receivePlayers;
+	exports.default = receiveMatches;
 
 /***/ },
-/* 271 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28890,94 +29262,26 @@
 	    value: true
 	});
 
-	var _redux = __webpack_require__(182);
-
-	var _players = __webpack_require__(272);
-
-	var _players2 = _interopRequireDefault(_players);
-
-	var _applicationState = __webpack_require__(273);
-
-	var _applicationState2 = _interopRequireDefault(_applicationState);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var reducer = (0, _redux.combineReducers)({
-	    players: _players2.default,
-	    applicationState: _applicationState2.default
-	});
-
-	exports.default = reducer;
-
-/***/ },
-/* 272 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _actions = __webpack_require__(261);
+	var _actions = __webpack_require__(266);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-	var players = function players() {
+	var matches = function matches() {
 	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 	    var action = arguments[1];
 
 	    switch (action.type) {
-	        case _actions.ADD_PLAYER:
-	            return [].concat(_toConsumableArray(state), [action.player]);
-	        case _actions.REMOVE_PLAYER:
-	            return state.filter(function (player) {
-	                return player.email !== action.player.email;
-	            });
+	        case _actions.ADD_MATCH:
+	            return [].concat(_toConsumableArray(state), [action.match]);
 	        default:
 	            return state;
 	    }
 	};
 
-	exports.default = players;
+	exports.default = matches;
 
 /***/ },
-/* 273 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	exports.STATE_SERVER_ERROR = exports.STATE_NO_INTERACTION = exports.STATE_DELETE_PLAYER = exports.STATE_SAVE_PLAYER = exports.STATE_FETCH_PLAYERS = undefined;
-
-	var _actions = __webpack_require__(261);
-
-	var STATE_FETCH_PLAYERS = exports.STATE_FETCH_PLAYERS = 'STATE_FETCH_PLAYERS';
-	var STATE_SAVE_PLAYER = exports.STATE_SAVE_PLAYER = 'STATE_SAVE_PLAYER';
-	var STATE_DELETE_PLAYER = exports.STATE_DELETE_PLAYER = 'STATE_DELETE_PLAYER';
-	var STATE_NO_INTERACTION = exports.STATE_NO_INTERACTION = 'STATE_NO_INTERACTION';
-	var STATE_SERVER_ERROR = exports.STATE_SERVER_ERROR = 'STATE_SERVER_ERROR;';
-
-	var applicationState = function applicationState() {
-	    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : STATE_FETCH_PLAYERS;
-	    var action = arguments[1];
-
-	    switch (action.type) {
-	        case _actions.REQUEST_PLAYERS:
-	            return STATE_FETCH_PLAYERS;
-	        case _actions.ADD_PLAYER:
-	            return STATE_NO_INTERACTION;
-	        default:
-	            return state;
-	    }
-	};
-
-	exports.default = applicationState;
-
-/***/ },
-/* 274 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28990,26 +29294,28 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _addplayer = __webpack_require__(259);
-
-	var _addplayer2 = _interopRequireDefault(_addplayer);
-
-	var _playerListContainer = __webpack_require__(263);
-
-	var _playerListContainer2 = _interopRequireDefault(_playerListContainer);
+	var _reactRouter = __webpack_require__(205);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var PlayerApp = function PlayerApp() {
+	var Navigation = function Navigation() {
 	    return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_addplayer2.default, null),
-	        _react2.default.createElement(_playerListContainer2.default, null)
+	        _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/players' },
+	            'Players'
+	        ),
+	        _react2.default.createElement(
+	            _reactRouter.Link,
+	            { to: '/matches' },
+	            'Matches'
+	        )
 	    );
 	};
 
-	exports.default = PlayerApp;
+	exports.default = Navigation;
 
 /***/ }
 /******/ ]);
