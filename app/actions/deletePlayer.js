@@ -8,9 +8,8 @@ const deletePlayer = (url, player) => {
                 'Accept': 'application/json'
             },
             body: JSON.stringify({
-                first_name: player.first_name,
-                last_name: player.last_name,
-                email: player.email_address
+                nickname: player.nickname,
+                email: player.email
             }) 
         })
         .then(dispatch(removePlayer(player)));

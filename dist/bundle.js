@@ -503,7 +503,7 @@
 
 	var _root2 = _interopRequireDefault(_root);
 
-	var _store = __webpack_require__(265);
+	var _store = __webpack_require__(267);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21896,9 +21896,9 @@
 
 	var _reactRouter = __webpack_require__(205);
 
-	var _app = __webpack_require__(258);
+	var _playerApp = __webpack_require__(274);
 
-	var _app2 = _interopRequireDefault(_app);
+	var _playerApp2 = _interopRequireDefault(_playerApp);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21910,7 +21910,7 @@
 	        _react2.default.createElement(
 	            _reactRouter.Router,
 	            { history: _reactRouter.browserHistory },
-	            _react2.default.createElement(_reactRouter.Route, { path: '/players', component: _app2.default })
+	            _react2.default.createElement(_reactRouter.Route, { path: '/players', component: _playerApp2.default })
 	        )
 	    );
 	};
@@ -28454,41 +28454,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ },
-/* 258 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _react = __webpack_require__(3);
-
-	var _react2 = _interopRequireDefault(_react);
-
-	var _addplayer = __webpack_require__(259);
-
-	var _addplayer2 = _interopRequireDefault(_addplayer);
-
-	var _playerListContainer = __webpack_require__(262);
-
-	var _playerListContainer2 = _interopRequireDefault(_playerListContainer);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	var PlayerApp = function PlayerApp() {
-	    return _react2.default.createElement(
-	        'div',
-	        null,
-	        _react2.default.createElement(_addplayer2.default, null),
-	        _react2.default.createElement(_playerListContainer2.default, null)
-	    );
-	};
-
-	exports.default = PlayerApp;
-
-/***/ },
+/* 258 */,
 /* 259 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -28504,33 +28470,29 @@
 
 	var _reactRedux = __webpack_require__(175);
 
-	var _savePlayer = __webpack_require__(270);
+	var _savePlayer = __webpack_require__(260);
 
 	var _savePlayer2 = _interopRequireDefault(_savePlayer);
 
-	var _inputBox = __webpack_require__(261);
+	var _inputBox = __webpack_require__(262);
 
 	var _inputBox2 = _interopRequireDefault(_inputBox);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var addPlayerUrl = 'http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/addPlayer';
+	var addPlayerUrl = 'http://192.168.99.100:8000/team/d5cf8e25-cfa2-4b98-a40d-ece18dc0816b/addPlayer';
 
 	var AddPlayer = function AddPlayer(_ref) {
 	    var dispatch = _ref.dispatch;
 
-	    var firstName = void 0;
-	    var lastName = void 0;
+	    var nickname = void 0;
 	    var email = void 0;
 
 	    return _react2.default.createElement(
 	        'div',
 	        null,
-	        _react2.default.createElement(_inputBox2.default, { label: 'First name', value: function value(node) {
-	                return firstName = node;
-	            } }),
-	        _react2.default.createElement(_inputBox2.default, { label: 'Last name', value: function value(node) {
-	                return lastName = node;
+	        _react2.default.createElement(_inputBox2.default, { label: 'Nickname', value: function value(node) {
+	                return nickname = node;
 	            } }),
 	        _react2.default.createElement(_inputBox2.default, { label: 'Email', value: function value(node) {
 	                return email = node;
@@ -28540,14 +28502,12 @@
 	            {
 	                onClick: function onClick() {
 	                    var action = (0, _savePlayer2.default)(addPlayerUrl, {
-	                        first_name: firstName.value,
-	                        last_name: lastName.value,
-	                        email_address: email.value
+	                        nickname: nickname.value,
+	                        email: email.value
 	                    });
 
 	                    dispatch(action);
-	                    firstName.value = '';
-	                    lastName.value = '';
+	                    nickname.value = '';
 	                    email.value = '';
 	                } },
 	            'Add player'
@@ -28566,12 +28526,35 @@
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.receivePlayers = exports.fetchPlayers = exports.requestPlayers = exports.removePlayer = exports.addPlayer = exports.RECEIVE_PLAYERS = exports.REQUEST_PLAYERS = exports.FETCH_PLAYERS = exports.REMOVE_PLAYER = exports.ADD_PLAYER = undefined;
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+	var _index = __webpack_require__(261);
 
-	__webpack_require__(1);
+	var savePlayer = function savePlayer(url, player) {
+	    return function (dispatch) {
+	        fetch(url, {
+	            method: 'POST',
+	            headers: {
+	                'Accept': 'application/json'
+	            },
+	            body: JSON.stringify({
+	                nickname: player.nickname,
+	                email: player.email
+	            })
+	        }).then(dispatch((0, _index.addPlayer)(player)));
+	    };
+	};
 
+	exports.default = savePlayer;
+
+/***/ },
+/* 261 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
 	var ADD_PLAYER = exports.ADD_PLAYER = 'ADD_PLAYER';
 	var REMOVE_PLAYER = exports.REMOVE_PLAYER = 'REMOVE_PLAYER';
 	var FETCH_PLAYERS = exports.FETCH_PLAYERS = 'FETCH_PLAYERS';
@@ -28579,37 +28562,17 @@
 	var RECEIVE_PLAYERS = exports.RECEIVE_PLAYERS = 'RECEIVE_PLAYERS';
 
 	var addPlayer = exports.addPlayer = function addPlayer(player) {
-	    return { type: ADD_PLAYER, player: player };
+	  return { type: ADD_PLAYER, player: player };
 	};
 	var removePlayer = exports.removePlayer = function removePlayer(player) {
-	    return { type: REMOVE_PLAYER, player: player };
+	  return { type: REMOVE_PLAYER, player: player };
 	};
 	var requestPlayers = exports.requestPlayers = function requestPlayers() {
-	    return { type: REQUEST_PLAYERS };
-	};
-
-	var fetchPlayers = exports.fetchPlayers = function fetchPlayers(url) {
-	    return function (dispatch) {
-	        dispatch(requestPlayers());
-	        return fetch(url).then(function (response) {
-	            return response.json();
-	        }).then(function (json) {
-	            return dispatch(receivePlayers(json));
-	        });
-	    };
-	};
-
-	var receivePlayers = exports.receivePlayers = function receivePlayers(json) {
-	    var playersArray = _typeof(json.players) === 'object' ? Object.values(json.players) : json.players;
-	    return function (dispatch) {
-	        playersArray.map(function (player) {
-	            dispatch(addPlayer(player));
-	        });
-	    };
+	  return { type: REQUEST_PLAYERS };
 	};
 
 /***/ },
-/* 261 */
+/* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -28642,7 +28605,7 @@
 	exports.default = InputBox;
 
 /***/ },
-/* 262 */
+/* 263 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28657,11 +28620,11 @@
 
 	var _reactRedux = __webpack_require__(175);
 
-	var _deletePlayer = __webpack_require__(271);
+	var _deletePlayer = __webpack_require__(264);
 
 	var _deletePlayer2 = _interopRequireDefault(_deletePlayer);
 
-	var _playerList = __webpack_require__(263);
+	var _playerList = __webpack_require__(265);
 
 	var _playerList2 = _interopRequireDefault(_playerList);
 
@@ -28689,7 +28652,36 @@
 	exports.default = PlayerListContainer;
 
 /***/ },
-/* 263 */
+/* 264 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _index = __webpack_require__(261);
+
+	var deletePlayer = function deletePlayer(url, player) {
+	    return function (dispatch) {
+	        fetch(url, {
+	            method: 'POST',
+	            headers: {
+	                'Accept': 'application/json'
+	            },
+	            body: JSON.stringify({
+	                nickname: player.nickname,
+	                email: player.email
+	            })
+	        }).then(dispatch((0, _index.removePlayer)(player)));
+	    };
+	};
+
+	exports.default = deletePlayer;
+
+/***/ },
+/* 265 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28704,7 +28696,7 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _player = __webpack_require__(264);
+	var _player = __webpack_require__(266);
 
 	var _player2 = _interopRequireDefault(_player);
 
@@ -28719,7 +28711,7 @@
 	        { className: visibility },
 	        players.map(function (player) {
 	            return _react2.default.createElement(_player2.default, _extends({
-	                key: player.email_address
+	                key: player.email
 	            }, player, {
 	                onClick: function onClick() {
 	                    return onRemovePlayer(player);
@@ -28732,7 +28724,7 @@
 	exports.default = PlayerList;
 
 /***/ },
-/* 264 */
+/* 266 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28748,8 +28740,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var Player = function Player(_ref) {
-	    var first_name = _ref.first_name,
-	        last_name = _ref.last_name,
+	    var nickname = _ref.nickname,
 	        onClick = _ref.onClick;
 	    return _react2.default.createElement(
 	        'li',
@@ -28757,12 +28748,7 @@
 	        _react2.default.createElement(
 	            'span',
 	            null,
-	            first_name
-	        ),
-	        _react2.default.createElement(
-	            'span',
-	            null,
-	            last_name
+	            nickname
 	        ),
 	        _react2.default.createElement(
 	            'button',
@@ -28775,7 +28761,7 @@
 	exports.default = Player;
 
 /***/ },
-/* 265 */
+/* 267 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28787,13 +28773,15 @@
 
 	var _redux = __webpack_require__(182);
 
-	var _reduxThunk = __webpack_require__(266);
+	var _reduxThunk = __webpack_require__(268);
 
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 
-	var _actions = __webpack_require__(260);
+	var _fetchPlayers = __webpack_require__(269);
 
-	var _reducers = __webpack_require__(267);
+	var _fetchPlayers2 = _interopRequireDefault(_fetchPlayers);
+
+	var _reducers = __webpack_require__(271);
 
 	var _reducers2 = _interopRequireDefault(_reducers);
 
@@ -28802,12 +28790,12 @@
 	var configureStore = exports.configureStore = function configureStore() {
 	    var store = (0, _redux.createStore)(_reducers2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 
-	    store.dispatch((0, _actions.fetchPlayers)('http://192.168.99.100:8000/team/15dc1919-a325-4f2a-9178-949b3b36a9c0/players'));
+	    store.dispatch((0, _fetchPlayers2.default)('http://192.168.99.100:8000/team/d5cf8e25-cfa2-4b98-a40d-ece18dc0816b/players'));
 	    return store;
 	};
 
 /***/ },
-/* 266 */
+/* 268 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28835,7 +28823,65 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 267 */
+/* 269 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	__webpack_require__(1);
+
+	var _receivePlayers = __webpack_require__(270);
+
+	var _receivePlayers2 = _interopRequireDefault(_receivePlayers);
+
+	var _index = __webpack_require__(261);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var fetchPlayers = function fetchPlayers(url) {
+	    return function (dispatch) {
+	        dispatch((0, _index.requestPlayers)());
+	        return fetch(url).then(function (response) {
+	            return response.json();
+	        }).then(function (json) {
+	            return dispatch((0, _receivePlayers2.default)(json));
+	        });
+	    };
+	};
+
+	exports.default = fetchPlayers;
+
+/***/ },
+/* 270 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+	var _index = __webpack_require__(261);
+
+	var receivePlayers = function receivePlayers(json) {
+	    var playersArray = _typeof(json.players) === 'object' ? Object.values(json.players) : json.players;
+	    return function (dispatch) {
+	        playersArray.map(function (player) {
+	            dispatch((0, _index.addPlayer)(player));
+	        });
+	    };
+	};
+
+	exports.default = receivePlayers;
+
+/***/ },
+/* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28846,11 +28892,11 @@
 
 	var _redux = __webpack_require__(182);
 
-	var _players = __webpack_require__(268);
+	var _players = __webpack_require__(272);
 
 	var _players2 = _interopRequireDefault(_players);
 
-	var _applicationState = __webpack_require__(269);
+	var _applicationState = __webpack_require__(273);
 
 	var _applicationState2 = _interopRequireDefault(_applicationState);
 
@@ -28864,7 +28910,7 @@
 	exports.default = reducer;
 
 /***/ },
-/* 268 */
+/* 272 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28873,7 +28919,7 @@
 	    value: true
 	});
 
-	var _actions = __webpack_require__(260);
+	var _actions = __webpack_require__(261);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -28886,7 +28932,7 @@
 	            return [].concat(_toConsumableArray(state), [action.player]);
 	        case _actions.REMOVE_PLAYER:
 	            return state.filter(function (player) {
-	                return player.email_address !== action.player.email_address;
+	                return player.email !== action.player.email;
 	            });
 	        default:
 	            return state;
@@ -28896,7 +28942,7 @@
 	exports.default = players;
 
 /***/ },
-/* 269 */
+/* 273 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28906,7 +28952,7 @@
 	});
 	exports.STATE_SERVER_ERROR = exports.STATE_NO_INTERACTION = exports.STATE_DELETE_PLAYER = exports.STATE_SAVE_PLAYER = exports.STATE_FETCH_PLAYERS = undefined;
 
-	var _actions = __webpack_require__(260);
+	var _actions = __webpack_require__(261);
 
 	var STATE_FETCH_PLAYERS = exports.STATE_FETCH_PLAYERS = 'STATE_FETCH_PLAYERS';
 	var STATE_SAVE_PLAYER = exports.STATE_SAVE_PLAYER = 'STATE_SAVE_PLAYER';
@@ -28931,7 +28977,7 @@
 	exports.default = applicationState;
 
 /***/ },
-/* 270 */
+/* 274 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28940,55 +28986,30 @@
 	    value: true
 	});
 
-	var _index = __webpack_require__(260);
+	var _react = __webpack_require__(3);
 
-	var savePlayer = function savePlayer(url, player) {
-	    return function (dispatch) {
-	        fetch(url, {
-	            method: 'POST',
-	            headers: {
-	                'Accept': 'application/json'
-	            },
-	            body: JSON.stringify({
-	                first_name: player.first_name,
-	                last_name: player.last_name,
-	                email: player.email_address
-	            })
-	        }).then(dispatch((0, _index.addPlayer)(player)));
-	    };
+	var _react2 = _interopRequireDefault(_react);
+
+	var _addplayer = __webpack_require__(259);
+
+	var _addplayer2 = _interopRequireDefault(_addplayer);
+
+	var _playerListContainer = __webpack_require__(263);
+
+	var _playerListContainer2 = _interopRequireDefault(_playerListContainer);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	var PlayerApp = function PlayerApp() {
+	    return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(_addplayer2.default, null),
+	        _react2.default.createElement(_playerListContainer2.default, null)
+	    );
 	};
 
-	exports.default = savePlayer;
-
-/***/ },
-/* 271 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _index = __webpack_require__(260);
-
-	var deletePlayer = function deletePlayer(url, player) {
-	    return function (dispatch) {
-	        fetch(url, {
-	            method: 'POST',
-	            headers: {
-	                'Accept': 'application/json'
-	            },
-	            body: JSON.stringify({
-	                first_name: player.first_name,
-	                last_name: player.last_name,
-	                email: player.email_address
-	            })
-	        }).then(dispatch((0, _index.removePlayer)(player)));
-	    };
-	};
-
-	exports.default = deletePlayer;
+	exports.default = PlayerApp;
 
 /***/ }
 /******/ ]);

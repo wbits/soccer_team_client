@@ -1,13 +1,11 @@
 import React from 'react';
 
 const Player = ({
-    first_name,
-    last_name,
+    nickname,
     onClick
 }) => (
     <li>
-        <span>{first_name}</span>
-        <span>{last_name}</span>
+        <span>{nickname}</span>
         <button onClick={onClick}>remove</button>
     </li>
 );

@@ -9,7 +9,7 @@ const PlayerList = ({
     <ul className={visibility}>
         {players.map(player =>
             <Player
-                key={player.email_address}
+                key={player.email}
                 {...player}
                 onClick={() => onRemovePlayer(player)}
             />

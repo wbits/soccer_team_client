@@ -9,7 +9,7 @@ const players = (state = [], action) => {
             ];
         case REMOVE_PLAYER:
             return state.filter((player) => {
-                return player.email_address !== action.player.email_address;
+                return player.email !== action.player.email;
             });
         default:
             return state;
