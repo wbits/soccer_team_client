@@ -38,14 +38,14 @@ let ScheduleMatchForm = props => {
             <legend>Address:</legend>
             <div>
               <label htmlFor="street">Street:</label>
-              <Field name="street" component="input" type="text"/>
               <label htmlFor="house_number">Number:</label>
+              <Field name="street" component="input" type="text"/>
               <Field name="house_number" component="input" type="text"/>
             </div>
             <div>
               <label htmlFor="postal_code">Postal code:</label>
-              <Field name="postal_code" component="input" type="text"/>
               <label htmlFor="city">City:</label>
+              <Field name="postal_code" component="input" type="text"/>
               <Field name="city" component="input" type="text"/>
             </div>
         </fieldset>
